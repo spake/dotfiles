@@ -1,0 +1,77 @@
+#!/usr/bin/env python
+
+import os
+import sys
+
+verbose = False
+if len(sys.argv) > 1:
+    args = sys.argv[1:]
+    if '-h' in args or '--help' in args:
+        print 'usage: %s [-h] [-v]' % sys.argv[0]
+        quit()
+    if '-v' in args or '--verbose' in args:
+        verbose = True
+
+indent = ' ' * 2
+backup_suffix = '.backup'
+print 'propagating...'
+for name, subdirs, files in os.walk('.'):
+    # ignore .git
+    if name.startswith('./.git'):
+        continue
+    for filename in files:
+        # is the file suitable?
+        if (filename.startswith('.') and not filename.endswith('.swp') and not filename.endswith('~')) or name.startswith('./.'):
+            path = '%s/%s' % (name, filename)
+
+            home_path = os.path.expanduser('~/%s' % path[2:])
+            this_path = os.path.realpath(path)
+
+            print path[2:]
+
+            # check if the file exists
+            if os.path.exists(home_path):
+                # is it a symlink?
+                if os.path.islink(home_path):
+                    # remove it anyway
+                    if verbose: print '%sRemoving symlink at %s' % (indent, home_path)
+                    os.unlink(home_path)
+                else:
+                    # is it a file?
+                    if os.path.isfile(home_path):
+                        valid_responses = ['o', 's', 'b', 'a']
+                        response = ''
+                        while response not in valid_responses:
+                            try:
+                                response = raw_input('%s%s already exists. [O]verwrite, [S]kip, [B]ackup or [A]bort? ' % (indent, home_path)).lower()
+                            except KeyboardInterrupt:
+                                print
+                                response = 'a'
+                        if response == 'o':
+                            print '%sOverwriting %s' % (indent, home_path)
+                            os.unlink(home_path)
+                        if response == 's':
+                            print '%sSkipping %s' % (indent, home_path)
+                            continue
+                        elif response == 'b':
+                            backup_path = home_path + backup_suffix
+                            print '%sBacking up %s to %s' % (indent, home_path, backup_path)
+                            os.rename(home_path, backup_path)
+                        elif response == 'a':
+                            print '%sAborting' % indent
+                            quit()
+                    elif os.path.isdir(home_path):
+                        print '%s%s is a directory, skipping' % (indent, home_path)
+                        continue
+                    else:
+                        print "%sSomething's fishy with %s, skipping" % (indent, home_path)
+                        continue
+
+            # create symlink
+            if verbose: print '%sCreating symlink at %s, pointing to %s' % (indent, home_path, this_path)
+            home_path_dir = os.path.expanduser('~/%s' % name)
+            if not os.path.exists(home_path_dir):
+                if verbose: print '%sCreating directory %s' % (indent, home_path_dir)
+                os.makedirs(home_path_dir)
+            os.symlink(this_path, home_path)
+print 'done'

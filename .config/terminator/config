@@ -1,0 +1,6 @@
+[global_config]
+scrollbar_position=disabled
+
+[profiles]
+[[default]]
+show_titlebar=False
