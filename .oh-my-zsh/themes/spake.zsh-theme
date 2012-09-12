@@ -6,7 +6,9 @@ function prompt_chr {
 
 # Git stuff
 function git_status {
+    if [[ `hostname` != 'eternalflame' ]]; then
         git branch >/dev/null 2>/dev/null && echo ' '$(git-prompt-status)
+    fi
 }
 
 # primary prompt
