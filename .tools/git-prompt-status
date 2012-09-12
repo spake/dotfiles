@@ -1,0 +1,52 @@
+#!/usr/bin/env python
+
+import subprocess, sys, re
+from collections import defaultdict as ddict
+out = sys.stdout.write
+
+cmd = "git status -sb"
+p = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
+info = p.communicate()[0].strip().split('\n')
+
+_map = {'?':'?', 'M':'+', 'D':'-'}
+
+data = ddict(int)
+branch = ''
+dirty = False
+
+for line in info:
+	if not len(line):
+		continue
+	if line[0] not in ' #':
+		dirty = True
+
+	status, string = line[1], line[3:]
+
+	if status == '#':
+		branch = string
+		try:
+			if branch.index('...'):
+				temp = branch.split('...')
+				branch = temp.pop(0)
+				data['^'] = re.search(r'ahead ([0-9]+)', temp[-1]).group(1)
+		except ValueError:
+			pass
+
+	if status in _map:
+		data[_map[status]] += 1
+
+color_magenta = '%{[35m%}'
+color_green = '%{[32m%}'
+color_reset = '%{[00m%}'
+
+if info[0]:
+	out('%s(%s'%(color_reset, color_magenta if dirty else color_green))
+	out(branch)
+	if dirty:
+		out('*')
+        if len(data) > 0:
+            out(' ')
+	for k in '+-?':
+		if k in data:
+			out(' %s%s%s%s'%(color_magenta,k,color_reset,data[k]))
+	out('%s) '%color_reset)
