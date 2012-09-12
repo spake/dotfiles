@@ -46,7 +46,7 @@ if info[0]:
 		out('*')
         if len(data) > 0:
             out(' ')
-	for k in '+-?':
+	for k in '^+-?':
 		if k in data:
 			out(' %s%s%s%s'%(color_magenta,k,color_reset,data[k]))
 	out('%s) '%color_reset)
