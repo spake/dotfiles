@@ -43,7 +43,8 @@ for name, subdirs, files in os.walk('.'):
     for filename in files:
         # is the file suitable?
         # check if the conditions defined earlier are all met
-        if filename.startswith(dotfile_prefix) and not any([filename.startswith(prefix) for prefix in exclude_prefixes]) and not any([filename.endswith(suffix) for suffix in exclude_suffixes]):
+        # that, or the folder starts with the dotfile prefix
+        if (filename.startswith(dotfile_prefix) and not any([filename.startswith(prefix) for prefix in exclude_prefixes]) and not any([filename.endswith(suffix) for suffix in exclude_suffixes])) or name.startswith('./%s' % dotfile_prefix):
             # reconstruct the full relative path of the current file
             path = '%s/%s' % (name, filename)
 
