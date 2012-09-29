@@ -35,4 +35,7 @@ do
 	sleep 20s
 done &
 
+# openbox autostart
+bash ~/.config/openbox/autostart
+
 exec ~/bin/startdwm

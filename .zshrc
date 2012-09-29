@@ -10,13 +10,6 @@ ZSH_THEME="spake"
 # Editor
 EDITOR="vim"
 
-# Aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias la='ls -a'
-alias ll='ls -l'
-alias lla='ls -la'
-
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -42,9 +35,17 @@ source $ZSH/oh-my-zsh.sh
 # Options
 unsetopt correct_all
 
+# Aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias l='ls'
+alias la='ls -a'
+alias ll='ls -l'
+alias lla='ls -la'
+
 # Normal binaries
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
-export PATH=$PATH:/usr/local/bin:/usr/local/sbin
+export PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/games
 
 # Local binaries
 export PATH=$PATH:~/bin:~/.tools
