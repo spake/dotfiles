@@ -1,6 +1,8 @@
 [global_config]
-scrollbar_position=disabled
+    scrollbar_position=disabled
 
 [profiles]
-[[default]]
-show_titlebar=False
+    [[default]]
+        use_system_font=False
+        font=Terminus 10
+        show_titlebar=False

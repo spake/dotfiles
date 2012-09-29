@@ -1,9 +1,5 @@
 #/bin/bash
-# Taken from:
-#	https://raw.github.com/kaihendry/Kai-s--HOME/master/.xinitrc
-#
-# for terminus font in Archlinux :(
-xset +fp /usr/share/fonts/local
+xset +fp /etc/X11/fonts/misc
 xset fp rehash
 
 xset -b # disable bell
@@ -19,29 +15,22 @@ then
 	SSH_ASKPASS=/usr/lib/ssh/x11-ssh-askpass ssh-add < /dev/null
 fi
 
-# 1280x720 = 720p X220
-#hash fswebcam && fswebcam -q --no-banner -r 1280x720 ~/private/login-photos/$(date +%Y-%m-%dT%H).jpg &
-
 xrdb -merge $HOME/.Xresources
 xmodmap ~/.Xmodmap
 setxkbmap -layout us -option ctrl:nocaps
 
-hash chromium && chromium &
-
 while true
 do
 	VOL=$(amixer get Master | tail -1 | sed 's/.*\[\([0-9]*%\)\].*/\1/')
-	LOCALTIME=$(date +%Z\=%Y-%m-%dT%H:%M)
-	OTHERTIME=$(TZ=Europe/London date +%Z\=%H:%M)
+	LOCALTIME=$(date +%H:%M)
 	IP=$(for i in `ip r`; do echo $i; done | grep -A 1 src | tail -n1) # can get confused if you use vmware
-	TEMP="$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))C"
+    BAT="$(acpi -b | awk '{ print $4 }' | tr -d ',')"
 
-	if acpi -a | grep off-line > /dev/null
+	if acpi -b | grep Charging > /dev/null
 	then
-		BAT="Bat. $(acpi -b | awk '{ print $4 " " $5 }' | tr -d ',')"
-		xsetroot -name "$IP $BAT $VOL $TEMP $LOCALTIME $OTHERTIME"
+		xsetroot -name "$IP +$BAT $LOCALTIME"
 	else
-		xsetroot -name "$IP $VOL $TEMP $LOCALTIME $OTHERTIME"
+		xsetroot -name "$IP $BAT $LOCALTIME"
 	fi
 	sleep 20s
 done &
