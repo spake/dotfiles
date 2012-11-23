@@ -1,7 +1,9 @@
 # change prompt chr depending where we are
 function prompt_chr {
+    if [[ `hostname` != 'eternalflame' ]]; then
         git branch >/dev/null 2>/dev/null && echo '±' && return
-            echo "»"
+    fi
+    echo "»"
 }
 
 # Git stuff

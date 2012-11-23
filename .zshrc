@@ -49,3 +49,9 @@ export PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/games
 
 # Local binaries
 export PATH=$PATH:~/bin:~/.tools
+
+# Host-specific script
+HOST_SCRIPT=$HOME/bin/`hostname`
+if [ -e "$HOST_SCRIPT" ]; then
+    $HOST_SCRIPT
+fi
