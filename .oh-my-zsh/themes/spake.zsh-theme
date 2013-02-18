@@ -1,6 +1,8 @@
 # change prompt chr depending where we are
+NOGITPROMPT_FILE=~/.nogitprompt
+
 function prompt_chr {
-    if [[ `hostname` != 'eternalflame' ]]; then
+    if [[ ! -f $NOGITPROMPT_FILE ]]; then
         git branch >/dev/null 2>/dev/null && echo '±' && return
     fi
     echo "»"
@@ -8,7 +10,7 @@ function prompt_chr {
 
 # Git stuff
 function git_status {
-    if [[ `hostname` != 'eternalflame' ]]; then
+    if [[ ! -f $NOGITPROMPT_FILE ]]; then
         git branch >/dev/null 2>/dev/null && echo ' '$(git-prompt-status)
     fi
 }
