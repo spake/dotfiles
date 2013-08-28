@@ -104,4 +104,6 @@ let g:lisp_rainbow=1
 :inoremap # X<BS>#
 
 " add python run support
-map <F5> :w<CR>:!python %<CR>
+map <F5> :w<CR>:!./%<CR>
+map <F6> :w<CR>:!make %<CR>
+map <F7> :w<CR>:!chmod +x %<CR>
