@@ -3,7 +3,7 @@
 echo " * Checking for prerequisites"
 PREREQS=( stow curl git vim zsh )
 for prereq in ${PREREQS[@]}; do
-    if ! which -s $prereq; then
+    if ! which $prereq >/dev/null; then
         echo "   - ERROR: Couldn't find $prereq."
         echo "     Make sure it's installed (and in your \$PATH) and try again."
         exit 1
