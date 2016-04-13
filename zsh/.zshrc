@@ -1,9 +1,7 @@
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
-
 # Editor
 EDITOR="/usr/bin/vim"
 
+# Antigen
 source ~/.antigen.zsh
 
 antigen bundle robbyrussell/oh-my-zsh lib/
@@ -12,6 +10,8 @@ antigen bundle git
 antigen bundle pip
 antigen bundle python
 antigen bundle brew
+
+antigen apply
 
 # Options
 unsetopt correct_all
