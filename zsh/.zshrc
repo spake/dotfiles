@@ -51,3 +51,5 @@ RPS1='${return_code}'
 
 # right prompt
 RPROMPT='%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[green]%}%m%{$reset_color%}'
+
+export EDITOR=vim
