@@ -26,7 +26,7 @@ done
 echo " * Checking for antigen"
 if ! [ -f ~/.antigen.zsh ]; then
     echo "   - Installing antigen"
-    curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > "$HOME/.antigen.zsh"
+    curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/bin/antigen.zsh > "$HOME/.antigen.zsh"
 fi
 
 # install vundle
