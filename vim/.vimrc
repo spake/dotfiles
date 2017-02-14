@@ -11,6 +11,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'kchmck/vim-coffee-script'
 
 " removing file-line for the moment :(
 " opening multiple files (e.g. `vim a b c`) results in filetype only
