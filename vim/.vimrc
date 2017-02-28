@@ -10,18 +10,14 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-airline/vim-airline'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'kchmck/vim-coffee-script'
-
-" removing file-line for the moment :(
-" opening multiple files (e.g. `vim a b c`) results in filetype only
-" being detected for the first file.
-"Plugin 'bogado/file-line'
-Bundle 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive' " git
 
 " Language-specific
 Plugin 'fatih/vim-go'
 Plugin 'rodjek/vim-puppet'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'lukaszkorecki/CoffeeTags'
 
 call vundle#end()
 filetype plugin indent on
@@ -31,6 +27,8 @@ filetype plugin indent on
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+
+let g:CoffeeAutoTagIncludeVars=1
 
 " === General things ===
 syntax enable
