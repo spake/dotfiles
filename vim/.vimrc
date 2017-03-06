@@ -24,6 +24,8 @@ filetype plugin indent on
 
 " === Plugin settings ===
 
+let g:go_fmt_fail_silently = 1
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -34,6 +36,7 @@ let g:CoffeeAutoTagIncludeVars=1
 syntax enable
 set modeline
 set encoding=utf-8
+set background=dark
 
 " I don't know where half this crap comes from
 set number
