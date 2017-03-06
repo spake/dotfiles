@@ -27,14 +27,21 @@ echo " * Checking for antigen"
 if ! [ -f ~/.antigen.zsh ]; then
     echo "   - Installing antigen"
     curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/bin/antigen.zsh > "$HOME/.antigen.zsh"
+else
+    echo "   - Already present"
 fi
 
 # install vundle
 echo " * Checking for Vundle"
-if ! [ -d ~/.vim ]; then
+if ! [ -d ~/.vim/bundle/Vundle.vim ]; then
     echo "   - Installing Vundle"
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    vim +PluginInstall +qall
+else
+    echo "   - Already present"
 fi
+
+# update vim plugins
+echo " * Updating vim plugins"
+vim +PluginInstall +qall
 
 echo " * Done!"
