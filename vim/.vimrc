@@ -17,7 +17,6 @@ Plugin 'fatih/vim-go'
 Plugin 'rodjek/vim-puppet'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'lukaszkorecki/CoffeeTags'
 
 call vundle#end()
 filetype plugin indent on
