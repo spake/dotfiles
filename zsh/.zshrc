@@ -30,12 +30,6 @@ export PATH=$PATH:/bin:/sbin
 # Local binaries
 export PATH=$PATH:$HOME/bin
 
-# Host-specific script
-HOST_SCRIPT="$HOME/bin/$( hostname -s )"
-if [ -e "$HOST_SCRIPT" ]; then
-    . $HOST_SCRIPT
-fi
-
 # Theme
 function prompt_chr {
     echo "»"
@@ -53,3 +47,9 @@ RPS1='${return_code}'
 RPROMPT='%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[green]%}%m%{$reset_color%}'
 
 export EDITOR=vim
+
+# Host-specific script
+HOST_SCRIPT="$HOME/bin/$( hostname -s )"
+if [ -e "$HOST_SCRIPT" ]; then
+    . $HOST_SCRIPT
+fi
