@@ -31,13 +31,20 @@ export PATH=$PATH:/bin:/sbin
 export PATH=$PATH:$HOME/bin
 
 # Theme
+function get_branch_text {
+    BRANCH_TEXT=""
+    if BRANCH=$( git rev-parse --abbrev-ref HEAD 2>/dev/null ); then
+        BRANCH_TEXT=" %{$fg[yellow]%}[%{$fg[green]%}${BRANCH}%{$fg[yellow]%}]%{$reset_color%}"
+    fi
+    echo "$BRANCH_TEXT"
+}
 function prompt_chr {
     echo "»"
 }
 
 # primary prompt
 PROMPT='
-%{$fg[yellow]%}${PWD/#$HOME/~} %{$fg[magenta]%}$(prompt_chr)%{$reset_color%} '
+%{$fg[yellow]%}${PWD/#$HOME/~}$(get_branch_text) %{$fg[magenta]%}$(prompt_chr)%{$reset_color%} '
 
 # Continuation prompt
 PROMPT2='%{$fg[magenta]%}\ %{$reset_color%}'
