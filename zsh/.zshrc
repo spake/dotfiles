@@ -54,6 +54,7 @@ RPS1='${return_code}'
 RPROMPT='%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[green]%}%m%{$reset_color%}'
 
 export EDITOR=vim
+export LESS=-FXR
 
 # Host-specific script
 HOST_SCRIPT="$HOME/bin/$( hostname -s )"
